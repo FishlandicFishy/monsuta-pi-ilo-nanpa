@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><style>
+  .grid { display: grid; grid-template-columns: repeat(5, 30px); gap: 4px; margin-bottom: 10px; }
+  .cell { width: 30px; height: 30px; background: #eee; border: 1px solid #ccc; cursor: pointer; }
+  .cell.active { background: #333; }
+</style></head>
+<body>
+  <div class="grid" id="g"></div>
+  <textarea id="output" rows="8" cols="30"></textarea>
+  <script>
+    const grid = document.getElementById('g'), out = document.getElementById('output');
+    const state = Array(7).fill().map(() => Array(5).fill(false));
+    
+    for(let r=0; r<7; r++) {
+      for(let c=0; c<5; c++) {
+        const div = document.createElement('div');
+        div.className = 'cell';
+        div.onclick = () => {
+          state[r][c] = !state[r][c];
+          div.classList.toggle('active', state[r][c]);
+          out.value = JSON.stringify(state.map(row => row.map(v => v ? '#' : '.').join('')));
+        };
+        grid.appendChild(div);
+      }
+    }
+  </script>
+</body>
+</html>
