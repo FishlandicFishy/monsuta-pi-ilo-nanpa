@@ -2,7 +2,7 @@
 
 A working recreation of the **CASIO fx-50FH II** in the browser, based on <https://github.com/throwingogo-hub/fx-50fh-ii>.
 
-**[Open the calculator →](https://throwingogo-hub.github.io/fx-50fh-ii/)**
+**[Open the calculator →](https://fishlandicfishy.github.io/monsuta-pi-ilo-nanpa/)**
 
 The calculator's behaviour was reconstructed from CASIO's published user's
 guide for this calculator family, and the key layout was measured from
