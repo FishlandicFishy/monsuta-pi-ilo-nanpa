@@ -41,7 +41,8 @@ The physical keyboard is mapped:
 * `Backspace` is `DEL`
 * `Escape` is `AC`
 * arrow keys drive `REPLAY`
-* `Space` and `Tab` latch `SHIFT` and `ALPHA`
+* `Space` latches `SHIFT`
+* `Tab` latches `ALPHA`
 
 ## Known Issues
 * Clicking on "Prog" while editing a program does nothing (should show same menu as P-CMD)
@@ -58,32 +59,8 @@ The physical keyboard is mapped:
 * Text is sometimes cut off
 * Some variables are not distinguished from their plaintext variants
 * Some variables (or characters) are expressed as two characters, even if they should be one
-* Some glyphs do not correspond to the original Casio glyphs
+* Some glyphs may not correspond to the original Casio glyphs
 * FMLA should start with "Formula No.?" with `-  -` (with two blanks in the middle)
-* Formula names are wrong:
-  * `01:QuadEquation`
-  * `02:CosineTheorm`
-  * (03 is correct)
-  * `04:Normal_PD_Px`
-  * `05:Normal_PD_Qx`
-  * `06:Coulomb'sLaw`
-  * `07:ConductResis`
-  * `08:Magn_Force`
-  * `09:R_T-VoltChng`
-  * `10:Voltage_Gain`
-  * `11:LRC_S-CirImp`
-  * `12:LRC_P-CirImp`
-  * `13:ElecOsciFreq`
-  * (14 is correct)
-  * `15:SimpPend_Cyc`
-  * `16:SpngpendCyc`
-  * (17 is correct)
-  * `18:IdlGasStaEq`
-  * `19:CentriForce`
-  * `20:Elastic_Enr`
-  * (21 is correct)
-  * `22:Stadia_Ht`
-  * `23:Stadia_Dist`
 * Shift `,` should be `;`, not `:`
 * SD -> S-VAR notation: first page should be (x with bar), sigma x, sx
 

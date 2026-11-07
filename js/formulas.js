@@ -23,7 +23,7 @@ function normP(x) {
 
 export const FORMULAS = [
   {
-    no: 1, name: 'Quadratic', vars: ['a', 'b', 'c'], result: 'x1',
+    no: 1, name: 'QuadEquation', vars: ['a', 'b', 'c'], result: 'x1',
     look: 'ax²+bx+c=0',
     run: ({ a, b, c }) => {
       if (a === 0) E('a');
@@ -35,7 +35,7 @@ export const FORMULAS = [
     extra: ['x2']
   },
   {
-    no: 2, name: 'CosineTheorem', vars: ['b', 'c', 'θ'], result: 'a',
+    no: 2, name: 'CosineTheorm', vars: ['b', 'c', 'θ'], result: 'a',
     look: 'a=√(b²+c²-2bc cosθ)',
     run: ({ b, c, θ }, deg) => {
       if (b <= 0 || c <= 0 || θ <= 0 || θ > 180) E('r');
@@ -53,27 +53,27 @@ export const FORMULAS = [
     }
   },
   {
-    no: 4, name: 'Normal P(x)', vars: ['x'], result: 'P',
+    no: 4, name: 'Normal_PD_Px', vars: ['x'], result: 'P',
     look: 'P(x)=∫e^(-t²/2)dt/√(2π)',
     run: ({ x }) => { if (x < 0 || x >= 1e50) E('r'); return { P: normP(x) }; }
   },
   {
-    no: 5, name: 'Normal Q(x)', vars: ['x'], result: 'Q',
+    no: 5, name: 'Normal_PD_Qx', vars: ['x'], result: 'Q',
     look: 'Q(x)=∫0..|x| e^(-t²/2)dt/√(2π)',
     run: ({ x }) => { if (x < 0 || x >= 1e50) E('r'); return { Q: normP(Math.abs(x)) - 0.5 }; }
   },
   {
-    no: 6, name: 'Coulomb', vars: ['Q', 'q', 'r'], result: 'F',
+    no: 6, name: 'Coulomb\'sLaw', vars: ['Q', 'q', 'r'], result: 'F',
     look: 'F=Qq/(4πε0r²)',
     run: ({ Q, q, r }) => { if (r <= 0) E('r'); return { F: Q * q / (4 * Math.PI * EPS0 * r * r) }; }
   },
   {
-    no: 7, name: 'Resistance', vars: ['ρ', 'ℓ', 'S'], result: 'R',
+    no: 7, name: 'ConductResis', vars: ['ρ', 'ℓ', 'S'], result: 'R',
     look: 'R=ρℓ/S',
     run: ({ ρ, ℓ, S }) => { if (ρ <= 0 || ℓ <= 0 || S <= 0) E('r'); return { R: ρ * ℓ / S }; }
   },
   {
-    no: 8, name: 'MagneticForce', vars: ['I', 'B', 'ℓ', 'θ'], result: 'F',
+    no: 8, name: 'Magn_Force', vars: ['I', 'B', 'ℓ', 'θ'], result: 'F',
     look: 'F=IBℓsinθ',
     run: ({ I, B, ℓ, θ }, deg) => {
       if (ℓ <= 0 || Math.abs(θ) > 90) E('r');
@@ -81,7 +81,7 @@ export const FORMULAS = [
     }
   },
   {
-    no: 9, name: 'RC Circuit', vars: ['V', 'C', 'R', 't'], result: 'v',
+    no: 9, name: 'R_T-VoltChng', vars: ['V', 'C', 'R', 't'], result: 'v',
     look: 'VR=V·e^(-t/CR)',
     run: ({ V, C, R, t }) => {
       if (C <= 0 || R <= 0 || t <= 0) E('r');
@@ -89,7 +89,7 @@ export const FORMULAS = [
     }
   },
   {
-    no: 10, name: 'VoltageGain', vars: ['E', "E'"], result: 'G',
+    no: 10, name: 'Voltage_Gain', vars: ['E', "E'"], result: 'G',
     look: "G=20log10(E'/E)",
     run: (v) => {
       const r = v["E'"] / v.E;
@@ -98,7 +98,7 @@ export const FORMULAS = [
     }
   },
   {
-    no: 11, name: 'LRC Series', vars: ['R', 'f', 'L', 'C'], result: 'Z',
+    no: 11, name: 'LRC_S-CirImp', vars: ['R', 'f', 'L', 'C'], result: 'Z',
     look: 'Z=√(R²+(2πfL-1/2πfC)²)',
     run: ({ R, f, L, C }) => {
       if (R <= 0 || f <= 0 || L <= 0 || C <= 0) E('r');
@@ -107,7 +107,7 @@ export const FORMULAS = [
     }
   },
   {
-    no: 12, name: 'LRC Parallel', vars: ['R', 'f', 'L', 'C'], result: 'Z',
+    no: 12, name: 'LRC_P-CirImp', vars: ['R', 'f', 'L', 'C'], result: 'Z',
     look: 'Z=1/√(1/R²+(2πfC-1/2πfL)²)',
     run: ({ R, f, L, C }) => {
       if (R <= 0 || f <= 0 || L <= 0 || C <= 0) E('r');
@@ -116,7 +116,7 @@ export const FORMULAS = [
     }
   },
   {
-    no: 13, name: 'Oscillation', vars: ['L', 'C'], result: 'f',
+    no: 13, name: 'ElecOsciFreq', vars: ['L', 'C'], result: 'f',
     look: 'f1=1/(2π√(LC))',
     run: ({ L, C }) => {
       if (L <= 0 || C <= 0) E('r');
@@ -129,12 +129,12 @@ export const FORMULAS = [
     run: ({ v, t }) => { if (t <= 0) E('r'); return { s: v * t + G * t * t / 2 }; }
   },
   {
-    no: 15, name: 'Pendulum', vars: ['ℓ'], result: 't',
+    no: 15, name: 'SimpPend_Cyc', vars: ['ℓ'], result: 't',
     look: 'T=2π√(ℓ/g)',
     run: ({ ℓ }) => { if (ℓ <= 0) E('r'); return { t: 2 * Math.PI * Math.sqrt(ℓ / G) }; }
   },
   {
-    no: 16, name: 'SpringPend', vars: ['m', 'k'], result: 't',
+    no: 16, name: 'SpngpendCyc', vars: ['m', 'k'], result: 't',
     look: 'T=2π√(m/k)',
     run: ({ m, k }) => { if (m <= 0 || k <= 0) E('r'); return { t: 2 * Math.PI * Math.sqrt(m / k) }; }
   },
@@ -148,17 +148,17 @@ export const FORMULAS = [
     }
   },
   {
-    no: 18, name: 'IdealGas', vars: ['n', 'T', 'V'], result: 'P',
+    no: 18, name: 'IdlGasStaEq', vars: ['n', 'T', 'V'], result: 'P',
     look: 'P=nRT/V',
     run: ({ n, T, V }) => { if (n <= 0 || T <= 0 || V <= 0) E('r'); return { P: n * RGAS * T / V }; }
   },
   {
-    no: 19, name: 'Centrifugal', vars: ['m', 'v', 'r'], result: 'F',
+    no: 19, name: 'CentriForce', vars: ['m', 'v', 'r'], result: 'F',
     look: 'F=mv²/r',
     run: ({ m, v, r }) => { if (m <= 0 || v <= 0 || r <= 0) E('r'); return { F: m * v * v / r }; }
   },
   {
-    no: 20, name: 'ElasticEnergy', vars: ['K', 'x'], result: 'u',
+    no: 20, name: 'Elastic_Enr', vars: ['K', 'x'], result: 'u',
     look: 'U=Kx²/2',
     run: ({ K, x }) => { if (K <= 0 || x <= 0) E('r'); return { u: K * x * x / 2 }; }
   },
@@ -171,7 +171,7 @@ export const FORMULAS = [
     }
   },
   {
-    no: 22, name: 'StadiaHeight', vars: ['K', 'C', 'ℓ', 'θ'], result: 'h',
+    no: 22, name: 'Stadia_Ht', vars: ['K', 'C', 'ℓ', 'θ'], result: 'h',
     look: 'h=Kℓsin2θ/2+Csinθ',
     run: ({ K, C, ℓ, θ }, deg) => {
       if (ℓ <= 0 || θ <= 0 || θ >= 90) E('r');
@@ -180,7 +180,7 @@ export const FORMULAS = [
     }
   },
   {
-    no: 23, name: 'StadiaDist', vars: ['K', 'C', 'ℓ', 'θ'], result: 's',
+    no: 23, name: 'Stadia_Dist', vars: ['K', 'C', 'ℓ', 'θ'], result: 's',
     look: 'S=Kℓcos²θ+Ccosθ',
     run: ({ K, C, ℓ, θ }, deg) => {
       if (ℓ <= 0 || θ <= 0 || θ >= 90) E('r');
