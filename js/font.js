@@ -6,6 +6,8 @@
 // Every glyph is authored as a row picture, top row first, '#' for a lit dot.
 // They are converted to column bytes once at load, which is the order the
 // renderer wants.
+//
+// Use font-test.html to create glyphs.
 
 const G = {
   ' ': ['.....', '.....', '.....', '.....', '.....', '.....', '.....'],
