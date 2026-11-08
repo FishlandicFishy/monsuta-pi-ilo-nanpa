@@ -51,31 +51,31 @@ export class Run {
     const ifs = [], fors = [], whiles = [];
     this.stmts.forEach((s, i) => {
       const c = s.toks[0] && s.toks[0].c;
-      if (c === 'Lbl') {
+      if (c === 'Lbl' || c === 'pLbl') {
         const d = s.toks[1];
         if (d && d.k === K.DIGIT) this.labels[d.s] = i;
-      } else if (c === 'If') ifs.push({ i, elseIdx: -1, hasThen: false });
-      else if (c === 'Then') {
+      } else if (c === 'If' || c === 'pIf') ifs.push({ i, elseIdx: -1, hasThen: false });
+      else if (c === 'Then' || c === 'pThen') {
         if (!ifs.length || ifs[ifs.length - 1].hasThen) err('Syntax');
         ifs[ifs.length - 1].hasThen = true;
       }
-      else if (c === 'Else') {
+      else if (c === 'Else' || c === 'pElse') {
         if (!ifs.length || !ifs[ifs.length - 1].hasThen || ifs[ifs.length - 1].elseIdx >= 0) err('Syntax');
         ifs[ifs.length - 1].elseIdx = i;
       }
-      else if (c === 'IfEnd') {
+      else if (c === 'IfEnd' || c === 'pIfEnd') {
         const f = ifs.pop();
         if (!f || !f.hasThen) err('Syntax');
         this.ifMap[f.i] = { elseIdx: f.elseIdx, endIdx: i };
         if (f.elseIdx >= 0) this.ifMap[f.elseIdx] = { endIdx: i };
-      } else if (c === 'For') fors.push(i);
-      else if (c === 'Next') {
+      } else if (c === 'For' || c === 'pFor') fors.push(i);
+      else if (c === 'Next' || c === 'pNext') {
         const f = fors.pop();
         if (f === undefined) err('Syntax');
         this.loopMap[f] = i;
         this.loopMap[i] = f;
-      } else if (c === 'While') whiles.push(i);
-      else if (c === 'WhileEnd') {
+      } else if (c === 'While' || c === 'pWhile') whiles.push(i);
+      else if (c === 'WhileEnd' || c === 'pWhileEnd') {
         const w = whiles.pop();
         if (w === undefined) err('Syntax');
         this.loopMap[w] = i;
@@ -139,7 +139,7 @@ export class Run {
     const c = head.c;
 
     // conditional jump:  cond ⇒ statement
-    const jumpAt = toks.findIndex((t) => t.c === 'Jump');
+    const jumpAt = toks.findIndex((t) => t.c === 'Jump' || t.c === 'pJump');
     if (jumpAt >= 0 && !c) {
       const cond = this.evalTokens(toks.slice(0, jumpAt));
       this.last = cond;
@@ -149,20 +149,18 @@ export class Run {
     }
 
     switch (c) {
-      case 'Lbl': return null;
-      case 'Goto': {
+      case 'Lbl': case 'pLbl': return null;
+      case 'Goto': case 'pGoto': {
         const d = toks[1];
         if (!d || this.labels[d.s] === undefined) err('Go');
         this.pc = this.labels[d.s];
         return { jumped: true };
       }
-      case 'If': {
+      case 'If': case 'pIf': {
         const cond = this.evalTokens(toks.slice(1));
         this.m.ans = cond;
         const map = this.ifMap[this.pc];
         if (!map) err('Syntax');
-        // One frame is pushed on either path so that IfEnd always has exactly
-        // its own frame to pop.
         if (cond.re !== 0) {
           this.ifStack.push({ endIdx: map.endIdx, branch: 'then' });
           return null;
@@ -171,43 +169,43 @@ export class Run {
         this.pc = map.elseIdx >= 0 ? map.elseIdx : map.endIdx;
         return { jumped: true };
       }
-      case 'Then':
+      case 'Then': case 'pThen':
         return toks.length > 1 ? this.exec({ toks: toks.slice(1), pause: false }) : null;
-      case 'Else': {
+      case 'Else': case 'pElse': {
         const frame = this.ifStack[this.ifStack.length - 1];
         const map = this.ifMap[this.pc];
-        // Falling into Else from the true branch means the work is done.
         if (frame && map && frame.branch === 'then' && frame.endIdx === map.endIdx) {
           this.pc = map.endIdx;
           return { jumped: true };
         }
         return toks.length > 1 ? this.exec({ toks: toks.slice(1), pause: false }) : null;
       }
-      case 'IfEnd':
+      case 'IfEnd': case 'pIfEnd':
         if (this.ifStack.length) this.ifStack.pop();
         return null;
-      case 'For': return this.forStart(toks);
-      case 'Next': return this.forNext();
-      case 'While': {
+      case 'For': case 'pFor': return this.forStart(toks);
+      case 'Next': case 'pNext': return this.forNext();
+      case 'While': case 'pWhile': {
         const cond = this.evalTokens(toks.slice(1));
         this.m.ans = cond;
         if (cond.re === 0) { this.pc = this.loopMap[this.pc]; return null; }
         this.loops.push({ kind: 'while', start: this.pc, exit: this.loopMap[this.pc] });
         return null;
       }
-      case 'WhileEnd': {
+      case 'WhileEnd': case 'pWhileEnd': {
         const start = this.loopMap[this.pc];
         while (this.loops.length && this.loops[this.loops.length - 1].start !== start) this.loops.pop();
         if (this.loops.length) this.loops.pop();
         this.pc = start - 1;
         return null;
       }
-      case 'Break': {
+      case 'Break': case 'pBreak': {
         const f = this.loops.pop();
         if (!f) err('Syntax');
         this.pc = f.exit;
         return null;
       }
+      // ... (other cases remain as they are)
       case 'input': return this.inputPrompt(toks);
       case 'Deg': case 'Rad': case 'Gra':
         this.m.setup.angle = c; return null;
@@ -287,9 +285,9 @@ export class Run {
 
   forStart(toks) {
     // For expr → VAR To expr [Step expr]
-    const arrow = toks.findIndex((t) => t.c === 'assign');
-    const toIdx = toks.findIndex((t) => t.c === 'To');
-    const stepIdx = toks.findIndex((t) => t.c === 'Step');
+    const arrow = toks.findIndex((t) => t.c === 'assign' || t.c === 'pAsg');
+    const toIdx = toks.findIndex((t) => t.c === 'To' || t.c === 'pTo');
+    const stepIdx = toks.findIndex((t) => t.c === 'Step' || t.c === 'pStep');
     if (arrow < 0 || toIdx < 0) err('Syntax');
     const target = toks[arrow + 1];
     if (!target || !target.v) err('Syntax');
