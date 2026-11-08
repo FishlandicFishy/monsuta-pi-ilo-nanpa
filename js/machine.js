@@ -993,16 +993,16 @@ export class Machine {
     this.openMenu({
       page,
       pages: [
-    { items: [{ label: '?', run: push('pIn') }, { label: '→', run: push('pAsg') }, { label: ':', run: push(':') }, { label: '◢', run: push('pOut') }] },
-    { items: [{ label: '⇒', run: push('pJump') }, { label: '=', run: push('eq') }, { label: '≠', run: push('ne') }] },
-    { items: [{ label: '>', run: push('gt') }, { label: '<', run: push('lt') }, { label: '≥', run: push('ge') }, { label: '≤', run: push('le') }] },
-    { items: [{ label: 'Goto', run: push('pGoto') }, { label: 'Lbl', run: push('pLbl') }] },
-    { items: [{ label: 'While', run: push('pWhile') }, { label: 'WhlEnd', run: push('pWhileEnd') }] },
-    { items: [{ label: 'Next', run: push('pNext') }, { label: 'Break', run: push('pBreak') }] },
-    { items: [{ label: 'For', run: push('pFor') }, { label: 'To', run: push('pTo') }, { label: 'Step', run: push('pStep') }] },
-    { items: [{ label: 'Else', run: push('pElse') }, { label: 'IfEnd', run: push('pIfEnd') }] },
-    { items: [{ label: 'If', run: push('pIf') }, { label: 'Then', run: push('pThen') }] }
-    ]
+  { items: [{ label: '?', run: push('pIn') }, { label: '→', run: push('pAsg') }, { label: ':', run: ':' }, { label: '◢', run: push('pOut') }] },
+  { items: [{ label: '⇒', run: push('pJump') }, { label: '=', run: push('eq') }, { label: '≠', run: push('ne') }] },
+  { items: [{ label: '>', run: push('gt') }, { label: '<', run: push('lt') }, { label: '≥', run: push('ge') }, { label: '≤', run: push('le') }] },
+  { items: [{ label: 'Goto', run: push('Goto') }, { label: 'Lbl', run: push('Lbl') }] },
+  { items: [{ label: 'While', run: push('While') }, { label: 'WhlEnd', run: push('WhileEnd') }] },
+  { items: [{ label: 'Next', run: push('Next') }, { label: 'Break', run: push('Break') }] },
+  { items: [{ label: 'For', run: push('For') }, { label: 'To', run: push('To') }, { label: 'Step', run: push('Step') }] },
+  { items: [{ label: 'Else', run: push('Else') }, { label: 'IfEnd', run: push('IfEnd') }] },
+  { items: [{ label: 'If', run: push('If') }, { label: 'Then', run: push('Then') }] }
+]
     });
   }
 
