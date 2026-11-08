@@ -187,6 +187,9 @@ export class Machine {
         if (shift && this.mode === 'CMPLX') return this.toggleReIm();
         return this.execute();
       case 'PROG':
+        if (this.mode === 'PGRM') {
+          return this.openPCmd(0);
+        }
         return shift ? this.exitContext() : this.openProgram();
       case 'FMLA':
         return shift ? this.formulaLook() : this.openFormula();
@@ -990,20 +993,16 @@ export class Machine {
     this.openMenu({
       page,
       pages: [
-        { items: [{ label: '?', run: push('pIn') }, { label: '→', run: push('pAsg') }, { label: ':', run: push(':') }, { label: '◢', run: push('pOut') }] },
-        { items: [{ label: 'Goto', run: push('pGoto') }, { label: 'Lbl', run: push('pLbl') }, { label: '⇒', run: push('pJump') }] },
-        { items: [{ label: '=', run: push('eq') }, { label: '≠', run: push('ne') }, { label: '>', run: push('gt') }, { label: '<', run: push('lt') }] },
-        { items: [{ label: '≥', run: push('ge') }, { label: '≤', run: push('le') }] },
-        { items: [{ label: 'If', run: push('pIf') }, { label: 'Then', run: push('pThen') }, { label: 'Else', run: push('pElse') }, { label: 'IfEnd', run: push('pIfEnd') }] },
-        { items: [{ label: 'For', run: push('pFor') }, { label: 'To', run: push('pTo') }, { label: 'Step', run: push('pStep') }, { label: 'Next', run: push('pNext') }] },
-        { items: [{ label: 'While', run: push('pWhile') }, { label: 'WhlEnd', run: push('pWhileEnd') }, { label: 'Break', run: push('pBreak') }] },
-        { items: [{ label: 'Deg', run: push('pDeg') }, { label: 'Rad', run: push('pRad') }, { label: 'Gra', run: push('pGra') }] },
-        { items: [{ label: 'Fix', run: push('pFix') }, { label: 'Sci', run: push('pSci') }, { label: 'Norm', run: push('pNorm') }] },
-        { items: [{ label: 'FreqOn', run: push('pFreqOn') }, { label: 'FreqOff', run: push('pFreqOff') }] },
-        { items: [{ label: 'ClrMem', run: push('pClrMemory') }, { label: 'ClrStat', run: push('pClrStat') }] },
-        { items: [{ label: 'M+', run: push('pMplus') }, { label: 'M-', run: push('pMminus') }, { label: 'DT', run: push('pDT') }] },
-        { items: [{ label: 'Dec', run: push('pDec') }, { label: 'Hex', run: push('pHex') }, { label: 'Bin', run: push('pBin') }, { label: 'Oct', run: push('pOct') }] }
-      ]
+    { items: [{ label: '?', run: push('pIn') }, { label: '→', run: push('pAsg') }, { label: ':', run: push(':') }, { label: '◢', run: push('pOut') }] },
+    { items: [{ label: '⇒', run: push('pJump') }, { label: '=', run: push('eq') }, { label: '≠', run: push('ne') }] },
+    { items: [{ label: '>', run: push('gt') }, { label: '<', run: push('lt') }, { label: '≥', run: push('ge') }, { label: '≤', run: push('le') }] },
+    { items: [{ label: 'Goto', run: push('pGoto') }, { label: 'Lbl', run: push('pLbl') }] },
+    { items: [{ label: 'While', run: push('pWhile') }, { label: 'WhlEnd', run: push('pWhileEnd') }] },
+    { items: [{ label: 'Next', run: push('pNext') }, { label: 'Break', run: push('pBreak') }] },
+    { items: [{ label: 'For', run: push('pFor') }, { label: 'To', run: push('pTo') }, { label: 'Step', run: push('pStep') }] },
+    { items: [{ label: 'Else', run: push('pElse') }, { label: 'IfEnd', run: push('pIfEnd') }] },
+    { items: [{ label: 'If', run: push('pIf') }, { label: 'Then', run: push('pThen') }] }
+    ]
     });
   }
 
