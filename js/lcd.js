@@ -212,7 +212,8 @@ export class LCD {
   }
 
   // One large character cell: seven hexagonal segments, plus the hand-drawn
-  // glyphs that are not segment shapes (fraction bar, degree tick, i, ∠).
+  // glyphs that are not segment shapes (i, ∠)
+
   #cell(x, y, w, h, cell) {
     const c = this.ctx;
     const ch = cell.ch;
@@ -237,8 +238,8 @@ export class LCD {
       P(xc + t / 2, y1 - t / 2 - g), P(xc, y1 - g), P(xc - t / 2, y1 - t / 2 - g)
     ]);
 
-    if (ch === '⌐') { this.#fracBar(x, y, w, h); return; }
-    if (ch === '°') { this.#degree(x, y, w, h); return; }
+    //if (ch === '⌐') { this.#fracBar(x, y, w, h); return; }
+    //if (ch === '°') { this.#degree(x, y, w, h); return; }
     if (ch === 'i') { this.#imag(x, y, w, h); return; }
     if (ch === '∠') { this.#angle(x, y, w, h); return; }
 

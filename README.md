@@ -66,6 +66,7 @@ The physical keyboard is mapped:
 * pi is not defined as exactly 3.1415926535898
 * Likewise, e is not defined as exactly 2.71828182845904
 * In BASE mode, bases are not shown on screen
+* Cannot input `C` in BASE mode
 
 ## License
 
