@@ -1095,12 +1095,12 @@ for (const [key, mode, secondPage] of [
   // For 1 -> A To 5 : A^2 -> B : B (sum check via memory)
   const m = new Machine();
   send(m, '[MODE]6' + '1' + '1' + '1');
-  send(m, '@3[RIGHT][RIGHT][RIGHT][RIGHT][RIGHT]1');   // For
+  send(m, '@3[LEFT][LEFT][LEFT]1');   // For
   send(m, '1@[RCL]#[NEG]');
-  send(m, '@3[RIGHT][RIGHT][RIGHT][RIGHT][RIGHT]2');   // To
+  send(m, '@3[LEFT][LEFT][LEFT]2');   // To
   send(m, '5=');
   send(m, '#[NEG][MPLUS]=');                            // A M+  :
-  send(m, '@3[RIGHT][RIGHT][RIGHT][RIGHT][RIGHT]4');   // Next
+  send(m, '@3[RIGHT][RIGHT][RIGHT][RIGHT][RIGHT]1');   // Next
   send(m, '[AC]');
   send(m, '[MODE]1[PROG]1');
   send(m, '[RCL][MPLUS]');
