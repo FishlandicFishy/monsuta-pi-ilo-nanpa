@@ -63,6 +63,9 @@ The physical keyboard is mapped:
 * FMLA should start with "Formula No.?" with `-  -` (with two blanks in the middle)
 * Shift `,` should be `;`, not `:`
 * SD -> S-VAR notation: first page should be (x with bar), sigma x, sx
+* pi is not defined as exactly 3.1415926535898
+* Likewise, e is not defined as exactly 2.71828182845904
+* In BASE mode, bases are not shown on screen
 
 ## License
 
