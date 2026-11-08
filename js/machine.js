@@ -994,7 +994,7 @@ export class Machine {
       page,
       pages: [
   { items: [{ label: '?', run: push('pIn') }, { label: '→', run: push('pAsg') }, { label: ':', run: ':' }, { label: '◢', run: push('pOut') }] },
-  { items: [{ label: '⇒', run: push('pJump') }, { label: '=', run: push('eq') }, { label: '≠', run: push('ne' }] },
+  { items: [{ label: '⇒', run: push('pJump') }, { label: '=', run: push('eq') }, { label: '≠', run: push('ne') }] },
   { items: [{ label: '>', run: push('gt') }, { label: '<', run: push('lt') }, { label: '≥', run: push('ge') }, { label: '≤', run: push('le') }] },
   { items: [{ label: 'Goto', run: push('pGoto') }, { label: 'Lbl', run: push('pLbl') }] },
   { items: [{ label: 'While', run: push('pWhile') }, { label: 'WhlEnd', run: push('pWhileEnd') }] },
