@@ -187,7 +187,7 @@ export class Machine {
         if (shift && this.mode === 'CMPLX') return this.toggleReIm();
         return this.execute();
       case 'PROG':
-        if (this.mode === 'PGRM') {
+        if (this.mode === 'PRGM') {
           return this.openPCmd(0);
         }
         return shift ? this.exitContext() : this.openProgram();
