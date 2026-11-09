@@ -45,6 +45,7 @@ The physical keyboard is mapped:
 * `Tab` latches `ALPHA`
 
 ## Known Issues
+* Clicking on "Prog" while editing a program does nothing (should show same menu as P-CMD)
 * Text is sometimes cut off
 * Some variables are not distinguished from their plaintext variants
 * Some variables (or characters) are expressed as two characters, even if they should be one
@@ -57,6 +58,7 @@ The physical keyboard is mapped:
 * In BASE mode, bases are not shown on screen
 * Cannot input `C` in BASE mode
 * Small `∠` does not appear with r∠theta
+* In FMLA, text should be inputted on upper half of screen, not lower half
 
 ## License
 
