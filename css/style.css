@@ -2,6 +2,30 @@
    the way. The shell uses the generated image at its native 881x1785 geometry,
    so every hotspot can be placed as a percentage and stay aligned at any size. */
 
+@font-face {
+  font-family: 'Gelasio';
+  src: url('fonts/Gelasio.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cascadia Mono';
+  src: url('fonts/CascadiaMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/Inter.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --shell-w: 881;
   --shell-h: 1785;
@@ -20,7 +44,7 @@
 html, body {
   margin: 0;
   min-height: 100%;
-  font: 15px/1.5 "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+  font: 15px/1.5 Inter, sans-serif;
   background:
     linear-gradient(rgba(65, 68, 61, .035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(65, 68, 61, .035) 1px, transparent 1px),
@@ -69,7 +93,7 @@ main {
   position: relative;
   width: 100%;
   aspect-ratio: 881 / 1785;
-  background: url('../assets/fx-50fh-ii-generated-transparent.png?v=9206630d') center / 100% 100% no-repeat;
+  background: url('../assets/calc.png') center / 100% 100% no-repeat;
   filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .28));
   touch-action: manipulation;
   user-select: none;
@@ -140,35 +164,6 @@ main {
   flex-wrap: wrap;
   margin-top: 2px;
 }
-#mode-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 30px;
-  padding: 0 12px;
-  border: 1px solid rgba(47, 118, 99, .32);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .72);
-  color: #2b4f45;
-  font: 800 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .08em;
-  cursor: pointer;
-  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
-}
-#mode-chip::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #2f7663;
-  box-shadow: 0 0 0 3px rgba(47, 118, 99, .16);
-}
-#mode-chip:hover { border-color: #2f7663; background: #eef6f0; transform: translateY(-1px); }
-.mode-tip {
-  color: #6f6d62;
-  font: 600 10.5px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .02em;
-}
 
 /* Toast for keys the current mode refuses. */
 .key-hint {
@@ -181,7 +176,7 @@ main {
   border-radius: 12px;
   background: #1e2a25;
   color: #f7f4ea;
-  font: 600 13px/1.45 "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+  font: 600 13px/1.45 Inter, sans-serif;
   text-align: center;
   box-shadow: 0 18px 40px -18px rgba(20, 26, 23, .8);
   opacity: 0;
@@ -216,6 +211,7 @@ main {
   font-size: 13px;
   cursor: pointer;
   transition: opacity 150ms ease, transform 150ms ease;
+  font-family: Inter, sans-serif;
 }
 #help-toggle { padding: 7px 6px; opacity: .55; text-decoration: underline; }
 #studio-toggle {
@@ -290,13 +286,13 @@ main {
 .studio-kicker {
   margin: 0 0 8px;
   color: var(--st-accent);
-  font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 10px/1 "Cascadia Mono", monospace;
   letter-spacing: .16em;
 }
 .studio-head h1 {
   margin: 0;
   color: var(--st-ink);
-  font: 700 32px/1 "American Typewriter", Rockwell, Georgia, serif;
+  font: 700 32px/1 Gelasio, Georgia, serif;
   letter-spacing: -.03em;
 }
 .studio-intro {
@@ -322,7 +318,7 @@ main {
   border-radius: 999px;
   background: var(--st-accent-soft);
   color: #2a5f50;
-  font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 10px/1 "Cascadia Mono", monospace;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
@@ -341,7 +337,7 @@ main {
   border-radius: 999px;
   background: rgba(255, 253, 248, .7);
   color: var(--st-muted);
-  font: 700 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 700 10px/1.2 "Cascadia Mono", monospace;
 }
 
 /* ---- segmented tabs -------------------------------------------------------- */
@@ -366,7 +362,7 @@ main {
   border-radius: 9px;
   background: transparent;
   color: var(--st-muted);
-  font: 700 13px/1 "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+  font: 700 13px/1 Inter, sans-serif;
   cursor: pointer;
   transition: background 140ms ease, color 140ms ease, box-shadow 140ms ease;
 }
@@ -382,7 +378,7 @@ main {
   border-radius: 999px;
   background: var(--st-accent-soft);
   color: #2a5f50;
-  font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 10px/1 "Cascadia Mono", monospace;
 }
 .studio-view-tabs button[aria-selected="true"] span { background: var(--st-accent); color: #fff; }
 
@@ -397,7 +393,7 @@ main {
 }
 .studio-management > span {
   color: var(--st-muted);
-  font: 800 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 10px/1.2 "Cascadia Mono", monospace;
   letter-spacing: .12em;
   text-transform: uppercase;
 }
@@ -412,7 +408,7 @@ main {
   border-radius: 9px;
   background: var(--st-card);
   color: #333c37;
-  font: 700 12px/1 "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+  font: 700 12px/1 Inter, sans-serif;
   cursor: pointer;
   transition: transform 110ms ease, box-shadow 130ms ease, border-color 130ms ease, background 130ms ease;
 }
@@ -463,7 +459,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 .program-slots b {
   display: block;
   color: var(--st-ink);
-  font: 800 15px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 15px/1 "Cascadia Mono", monospace;
   letter-spacing: .02em;
 }
 .program-slots span {
@@ -471,7 +467,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   margin-top: 5px;
   overflow: hidden;
   color: var(--st-muted);
-  font: 400 10.5px/1.25 "Avenir Next", Avenir, sans-serif;
+  font: 400 10.5px/1.25 Inter, sans-serif;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -501,7 +497,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 .editor-label {
   display: block;
   color: var(--st-muted);
-  font: 800 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 10px/1.2 "Cascadia Mono", monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -516,7 +512,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   border-radius: 9px;
   background: #fffefb;
   color: var(--st-ink);
-  font: 700 12.5px/1 "Avenir Next", Avenir, sans-serif;
+  font: 700 12.5px/1 Inter, sans-serif;
   transition: border-color 130ms ease, box-shadow 130ms ease;
 }
 #studio-mode { min-height: 32px; padding: 0 30px 0 10px; appearance: none;
@@ -539,7 +535,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
     repeating-linear-gradient(0deg, transparent 0, transparent 21px, rgba(64, 76, 68, .06) 21px, rgba(64, 76, 68, .06) 22px),
     #fbfaf4;
   color: #22302a;
-  font: 13px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 13px/1.65 "Cascadia Mono", monospace;
   tab-size: 2;
   transition: border-color 130ms ease, box-shadow 130ms ease;
 }
@@ -553,7 +549,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   gap: 12px;
   margin-top: 10px;
   color: var(--st-muted);
-  font: 600 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 600 11px/1.4 "Cascadia Mono", monospace;
 }
 #program-feedback.error { color: var(--st-warn); }
 #program-bytes {
@@ -562,7 +558,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   border-radius: 999px;
   background: var(--st-sunk);
   color: #5c5a50;
-  font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 10px/1 "Cascadia Mono", monospace;
 }
 .byte-track { height: 6px; margin-top: 8px; overflow: hidden; border-radius: 6px; background: #e7e0d1; }
 .byte-track i { display: block; width: 0; height: 100%; border-radius: 6px; background: var(--st-accent); transition: width 180ms ease, background 180ms ease; }
@@ -603,12 +599,12 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 .drawer-heading h2 {
   margin: 0;
   color: var(--st-ink);
-  font: 700 14px/1.2 "American Typewriter", Rockwell, Georgia, serif;
+  font: 700 14px/1.2 Gelasio, Georgia, serif;
   letter-spacing: -.01em;
 }
 .drawer-heading span {
   color: var(--st-muted);
-  font: 700 9.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 700 9.5px/1 "Cascadia Mono", monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -623,7 +619,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 .command-group > span {
   padding-top: 6px;
   color: var(--st-accent);
-  font: 800 9px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 9px/1.2 "Cascadia Mono", monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -635,7 +631,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   border-radius: 7px;
   background: var(--st-card);
   color: #3a433d;
-  font: 600 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 600 11px/1 "Cascadia Mono", monospace;
   cursor: pointer;
   transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
 }
@@ -664,12 +660,12 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 .library-eyebrow {
   margin: 0 0 8px;
   color: var(--orange);
-  font: 800 9.5px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 9.5px/1.2 "Cascadia Mono", monospace;
   letter-spacing: .14em;
 }
 .library-head h2 {
   margin: 0;
-  font: 700 27px/1.05 "American Typewriter", Rockwell, Georgia, serif;
+  font: 700 27px/1.05 Gelasio, Georgia, serif;
   letter-spacing: -.03em;
 }
 .library-head p:not(.library-eyebrow) {
@@ -689,13 +685,13 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   border-radius: 999px;
   background: var(--st-card);
   color: #34544a;
-  font: 700 11px/1 "Avenir Next", Avenir, sans-serif;
+  font: 700 11px/1 Inter, sans-serif;
   text-decoration: none;
   transition: border-color 130ms ease, background 130ms ease, transform 130ms ease;
 }
 .library-pdf-link::before { content: "↓"; font-size: 12px; }
 .library-pdf-link:hover { border-color: var(--st-accent); background: var(--st-accent-soft); transform: translateY(-1px); }
-.library-memory { text-align: right; color: #4d5f57; font: 800 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.library-memory { text-align: right; color: #4d5f57; font: 800 10px/1.2 "Cascadia Mono", monospace; }
 .library-memory > div { width: 150px; height: 7px; margin-top: 8px; margin-left: auto; overflow: hidden; border-radius: 6px; background: #e4ddce; }
 .library-memory i { display: block; width: 0; height: 100%; background: var(--st-accent); transition: width 180ms ease-out, background 180ms ease-out; }
 .library-memory i.warning { background: var(--orange); }
@@ -710,7 +706,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   display: block;
   margin-bottom: 6px;
   color: var(--st-muted);
-  font: 800 9.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 9.5px/1 "Cascadia Mono", monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -748,7 +744,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   min-height: 20px;
   margin-top: 10px;
   color: #5b5a50;
-  font: 600 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 600 11px/1.4 "Cascadia Mono", monospace;
 }
 
 /* ---- packs ----------------------------------------------------------------- */
@@ -772,7 +768,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   transition: border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
 }
 .pack-card:hover { border-color: var(--st-line-strong); transform: translateY(-2px); box-shadow: 0 14px 30px -22px rgba(38, 44, 40, .55); }
-.pack-card h3 { margin: 0; font: 700 15px/1.2 "American Typewriter", Rockwell, Georgia, serif; letter-spacing: -.01em; }
+.pack-card h3 { margin: 0; font: 700 15px/1.2 Gelasio, Georgia, serif; letter-spacing: -.01em; }
 .pack-card p { min-height: 32px; margin: 7px 0 10px; color: var(--st-muted); font-size: 11px; line-height: 1.45; }
 .pack-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
 .pack-slots span {
@@ -787,16 +783,16 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 }
 .pack-slots b {
   color: #6f6a5c;
-  font: 800 8.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 8.5px/1 "Cascadia Mono", monospace;
   letter-spacing: .06em;
 }
 .pack-slots i {
   color: #2a4f43;
-  font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 10px/1 "Cascadia Mono", monospace;
   font-style: normal;
 }
 .pack-card footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 12px; }
-.pack-card footer span { color: #7a4b35; font: 800 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.pack-card footer span { color: #7a4b35; font: 800 11px/1 "Cascadia Mono", monospace; }
 .pack-card button { min-height: 34px; padding: 0 12px; }
 .pack-card button.confirming,
 .program-card button.confirming { border-color: #7f321f; background: #a84c31; color: #fff; }
@@ -809,10 +805,10 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   gap: 10px;
   margin-top: 18px;
 }
-.library-results-heading h2 { margin: 0; font: 700 16px/1.2 "American Typewriter", Rockwell, Georgia, serif; }
+.library-results-heading h2 { margin: 0; font: 700 16px/1.2 Gelasio, Georgia, serif; }
 .library-results-heading output {
   color: var(--st-muted);
-  font: 800 9.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 9.5px/1 "Cascadia Mono", monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -835,15 +831,15 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 .program-id {
   display: block;
   color: var(--card-accent, var(--st-accent));
-  font: 900 9.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 900 9.5px/1 "Cascadia Mono", monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
-.program-card h3 { margin: 6px 0 0; font: 700 16px/1.15 "American Typewriter", Rockwell, Georgia, serif; letter-spacing: -.02em; }
-.program-bytes { flex: none; padding: 5px 7px; border: 1px solid var(--st-line-strong); border-radius: 999px; color: #6c4939; font: 800 9.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.program-card h3 { margin: 6px 0 0; font: 700 16px/1.15 Gelasio, Georgia, serif; letter-spacing: -.02em; }
+.program-bytes { flex: none; padding: 5px 7px; border: 1px solid var(--st-line-strong); border-radius: 999px; color: #6c4939; font: 800 9.5px/1 "Cascadia Mono", monospace; }
 .program-summary { min-height: 33px; margin: 10px 0 6px; color: #5f5d52; font-size: 12px; line-height: 1.5; }
 .program-card details { margin-top: auto; border-top: 1px dashed var(--st-line); }
-.program-card summary { padding: 10px 0 8px; color: #4e554f; font: 700 10.5px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; list-style: none; }
+.program-card summary { padding: 10px 0 8px; color: #4e554f; font: 700 10.5px/1.2 "Cascadia Mono", monospace; cursor: pointer; list-style: none; }
 .program-card summary::-webkit-details-marker { display: none; }
 .program-card summary::before { content: "▸ "; color: var(--card-accent, var(--st-accent)); }
 .program-card details[open] summary::before { content: "▾ "; }
@@ -867,7 +863,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
   border-radius: 8px;
   background: #f3f7f2;
   color: #27312c;
-  font: 10px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 10px/1.5 "Cascadia Mono", monospace;
   white-space: pre-wrap;
 }
 .program-card button { width: 100%; min-height: 38px; margin-top: 4px; }
@@ -885,7 +881,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
 #help table { border-collapse: collapse; margin: .4em 0 1em; }
 #help td { padding: 1px 14px 1px 0; vertical-align: top; }
 #help code {
-  font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 12px/1.4 "Cascadia Mono", monospace;
   background: rgba(128, 128, 128, .16);
   padding: 1px 5px;
   border-radius: 4px;

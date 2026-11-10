@@ -10,7 +10,7 @@ import { setupProgramStudio } from './studio.js?v=studio-v9';
 const shell = document.getElementById('shell');
 const canvas = document.getElementById('lcd');
 const accessibleDisplay = document.getElementById('lcd-accessible');
-const modeChip = document.getElementById('mode-chip');
+//const modeChip = document.getElementById('mode-chip');
 const hintEl = document.getElementById('key-hint');
 const machine = new Machine();
 const lcd = new LCD(canvas);
@@ -68,8 +68,6 @@ let blink = true;
 let dirty = true;
 let lastNotice = 0;
 let lastModeLabel = '';
-
-modeChip.addEventListener('click', () => tap('MODE'));
 
 const studioController = setupProgramStudio(machine, () => {
   blink = true;
@@ -145,7 +143,6 @@ function frame(now) {
   const modeLabel = `${machine.mode} · ${machine.setup.angle}`;
   if (modeLabel !== lastModeLabel) {
     lastModeLabel = modeLabel;
-    modeChip.textContent = modeLabel;
   }
   if (dirty) {
     const v = machine.view();
