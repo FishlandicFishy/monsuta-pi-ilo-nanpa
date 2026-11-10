@@ -43,6 +43,8 @@ export class LCD {
     this.ctx = canvas.getContext('2d');
     this.dpr = Math.min(3, window.devicePixelRatio || 1);
     this.resize();
+    this.strokeStyle = "grey";
+    this.lineWidth = 5;
   }
 
   resize() {
